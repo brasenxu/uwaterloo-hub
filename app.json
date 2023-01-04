@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "UWMaps",
-    "slug": "UWMaps",
-    "version": "1.0.0",
+    "name": "UW Hub",
+    "slug": "UWHub",
+    "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./app/assets/logos/icon.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/assets/logos/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#28292c"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +22,20 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./app/assets/logos/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       }
     },
+    "androidNavigationBar": {
+      "backgroundColor": "#28292c"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "translucent": true,
+      "backgroundColor": "#00000000"
+    },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/logos/favicon.png"
     }
   }
 }
