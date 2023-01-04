@@ -12,7 +12,7 @@ const convertTime = (time24) => {
                 return `12${time24.slice(2, 5)}am`;
             return `${hour}${time24.slice(2, 5)}pm`;
         } else {
-            if (hour === 0)
+            if (hour === 12)
                 return `12${time24.slice(2, 5)}pm`;
             return `${hour - 12}${time24.slice(2, 5)}pm`
         }
