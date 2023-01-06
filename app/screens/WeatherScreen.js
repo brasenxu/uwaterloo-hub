@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Platform, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { Appbar, Avatar, Card, Divider, Snackbar, Text } from "react-native-paper";
+import { Platform, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Appbar, Avatar, Card, Divider, Snackbar, Text } from "react-native-paper";
 
 import colors from "../config/colors";
 import sharedStyles from "../config/sharedStyles";
@@ -12,7 +12,7 @@ function renderWeatherView(weatherData) {
     if (weatherData === null) {
         return (
             <View style={{ justifyContent: "center" }}>
-                <Text>An error occurred.</Text>
+                <Text style={styles.errorMessage}>Something went wrong.</Text>
             </View>
         )
     }
@@ -125,11 +125,10 @@ function WeatherScreen() {
         <ActivityIndicator
             animating={true}
             color={colors.inverseSurface}
-            size="large"
             style={styles.loadingAnimation} />
     );
 
-    const refreshCooldown = 15;
+    const [refreshCooldown, setRefreshCooldown] = useState(15);
     const [lastRefresh, setLastRefresh] = useState(new Date());
     const [lastRefreshMessage, setLastRefreshMessage] = useState("Updating...");
     const [refreshControlVisible, setRefreshControlVisible] = useState(false);
@@ -175,11 +174,12 @@ function WeatherScreen() {
                     ]
                 }))
 
+                setRefreshCooldown(15);
                 setLastRefreshMessage(`Last updated at ${utils.generateTime(currentTime)}`)
 
             })
-            .catch(e => {
-                console.log(e)
+            .catch(() => {
+                setRefreshCooldown(0);
                 setWeatherView(renderWeatherView(null))
                 setLastRefreshMessage(`Last update attempt at ${utils.generateTime(currentTime)}`)
             })
@@ -214,12 +214,10 @@ function WeatherScreen() {
             </ScrollView>
 
             <Snackbar
-                visible={refreshWarningVisible}
+                action={{ label: "OK" }}
+                children={`You can only refresh once every ${refreshCooldown} minutes`}
                 onDismiss={() => setRefreshWarningVisible(false)}
-                action={{ label: "OK" }}>
-
-                You can only refresh once every 15 minutes.
-            </Snackbar>
+                visible={refreshWarningVisible} />
 
         </View>
 
@@ -235,6 +233,10 @@ const styles = StyleSheet.create({
     subtitle: {
         marginBottom: 15,
         fontStyle: "italic"
+    },
+    errorMessage: {
+        fontWeight: sharedStyles.bold,
+        marginBottom: 15,
     },
 
     widgetContainer: {
