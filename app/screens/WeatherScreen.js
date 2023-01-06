@@ -148,8 +148,8 @@ function WeatherScreen() {
         setLastRefreshMessage("Updating...")
 
         fetch("https://api.open-meteo.com/v1/forecast?latitude=43.4706&longitude=-80.5424&hourly=apparent_temperature,precipitation,weathercode&models=gfs_hrrr&daily=weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset&timezone=America%2FNew_York")
-            .then((res) => res.json())
-            .then((res) => {
+            .then(res => res.json())
+            .then(res => {
 
                 const pad = (number) => number.toString().padStart(2, "0");
 
@@ -178,11 +178,11 @@ function WeatherScreen() {
                 setLastRefreshMessage(`Last updated at ${utils.generateTime(currentTime)}`)
 
             })
-            /*.catch((e) => {
+            .catch(e => {
                 console.log(e)
                 setWeatherView(renderWeatherView(null))
                 setLastRefreshMessage(`Last update attempt at ${utils.generateTime(currentTime)}`)
-            })*/
+            })
 
     }
     useEffect(() => loadData(false), [])
