@@ -203,13 +203,14 @@ function WeatherScreen() {
             </Appbar.Header>
 
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 refreshControl={<RefreshControl onRefresh={onRefreshControl} refreshing={refreshControlVisible} />}
                 style={sharedStyles.mainContainer}>
 
                 <Text style={styles.subtitle}>{lastRefreshMessage}</Text>
                 {weatherView}
                 <Divider style={[sharedStyles.divider, { marginTop: 0 }]} />
-                <Text style={styles.subtitle}>Data from Open-Meteo API</Text>
+                <Text style={styles.subtitle}>Data from Open-Meteo's API</Text>
             </ScrollView>
 
             <Snackbar
