@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/logos/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.wusteven815.UWHub"
     },
     "androidNavigationBar": {
       "backgroundColor": "#28292c"
@@ -36,6 +37,11 @@
     },
     "web": {
       "favicon": "./app/assets/logos/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "32832743-a1cb-46f5-8df4-74bb956ac793"
+      }
     }
   }
 }

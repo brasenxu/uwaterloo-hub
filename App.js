@@ -5,18 +5,21 @@ import Nav from "./app/nav";
 import { StatusBar } from "react-native";
 import colors from "./app/config/colors";
 
-const theme = { ...MD3DarkTheme, colors };
+
+const theme = { ...MD3DarkTheme, colors }
 
 function App() {
-  console.log("Restarted App");
 
-  StatusBar.setBarStyle("light-content");
+    console.log("Restarted App")
 
-  return (
-    <Provider theme={theme}>
-      <Nav />
-    </Provider>
-  );
+    StatusBar.setBarStyle("light-content")
+
+    return (
+        <Provider theme={theme}>
+            <Nav/>
+        </Provider>
+    );
+
 }
 
 export default App;
