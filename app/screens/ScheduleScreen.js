@@ -4,6 +4,7 @@ import { Appbar, Avatar, Card, Paragraph, Text } from "react-native-paper";
 
 import sharedStyles from "../config/sharedStyles";
 import utils from "../config/utils";
+import colors from "../config/colors";
 
 function ScheduleScreen(props) {
     const [data, setData] = useState([]);
@@ -36,35 +37,35 @@ function ScheduleScreen(props) {
             name: "MATH 138",
             date: "Jan 1st",
             weekday: "Mon",
-            time: "12:00pm - 12:50pm",
+            time: "7:00pm - 8:50pm",
             location: "MC 4021 (Mathematics and Computer)",
         },
         {
             name: "MATH 139",
             date: "Jan 1st",
             weekday: "Mon",
-            time: "12:00pm - 12:50pm",
+            time: "8:00pm - 9:00pm",
             location: "MC 4021 (Mathematics and Computer)",
         },
         {
             name: "MATH 140",
             date: "Jan 1st",
             weekday: "Mon",
-            time: "12:00pm - 12:50pm",
+            time: "9:00pm - 10:50pm",
             location: "MC 4021 (Mathematics and Computer)",
         },
         {
             name: "MATH 141",
             date: "Jan 1st",
             weekday: "Mon",
-            time: "12:00pm - 12:50pm",
+            time: "10:00pm - 11:00pm",
             location: "MC 4021 (Mathematics and Computer)",
         },
         {
             name: "MATH 142",
             date: "Jan 1st",
             weekday: "Mon",
-            time: "12:00pm - 12:50pm",
+            time: "11:00pm - 11:50pm",
             location: "MC 4021 (Mathematics and Computer)",
         },
     ];
@@ -80,6 +81,7 @@ function ScheduleScreen(props) {
                     left={() => (
                         <Avatar.Text
                             size={40}
+                            style={styles.notFinishedAvatar}
                             labelStyle={styles.weekdayAvatar}
                             label={item.weekday}
                         />
@@ -138,6 +140,7 @@ function ScheduleScreen(props) {
         if (currTime === "12:00am") {
             console.log("New Day schedule change");
         }
+
         console.log(currTime + " " + currTime.charAt(currTime.length - 3));
     };
 
@@ -181,6 +184,15 @@ const styles = StyleSheet.create({
     weekdayAvatar: {
         fontSize: 14,
         fontWeight: sharedStyles.bold,
+    },
+    finishedAvatar: {
+        backgroundColor: colors.green,
+    },
+    inProgressAvatar: {
+        backgroundColor: colors.onYellowContainer,
+    },
+    notFinishedAvatar: {
+        backgroundColor: colors.yellow,
     },
 });
 
