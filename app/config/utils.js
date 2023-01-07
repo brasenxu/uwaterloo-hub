@@ -31,4 +31,12 @@ function pad(number) {
 
 }
 
-export default { convertTime, generateTime, pad }
+function getTimeFormat() {
+
+    if (format === "12")
+        return "hh:mmA"
+    return "HH:mm"
+
+}
+
+export default { convertTime, generateTime, getTimeFormat, pad }
