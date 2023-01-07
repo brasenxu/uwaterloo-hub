@@ -34,11 +34,9 @@ function renderWeatherView(weatherData) {
 
 function parseWeatherData(weatherData) {
 
-    const pad = (number) => number.toString().padStart(2, "0");
-
     const now = new Date();
-    const nowString = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-    const startIndex = weatherData["hourly"].time.indexOf(`${nowString}T${pad(now.getHours())}:00`);
+    const nowString = `${now.getFullYear()}-${utils.pad(now.getMonth() + 1)}-${utils.pad(now.getDate())}`;
+    const startIndex = weatherData["hourly"].time.indexOf(`${nowString}T${utils.pad(now.getHours())}:00`);
     const endIndex = weatherData["hourly"].time.indexOf(`${nowString}T23:00`);
     const hourlyData = [];
 
@@ -155,7 +153,7 @@ function WeatherScreen() {
         <ActivityIndicator
             animating={true}
             color={colors.inverseSurface}
-            style={styles.loadingAnimation} />
+            style={sharedStyles.loadingAnimation} />
     );
 
     const [refreshCooldown, setRefreshCooldown] = useState(15);
@@ -212,10 +210,10 @@ function WeatherScreen() {
                 refreshControl={<RefreshControl onRefresh={onRefreshControl} refreshing={refreshControlVisible} />}
                 style={sharedStyles.mainContainer}>
 
-                <Text style={styles.subtitle}>{lastRefreshMessage}</Text>
+                <Text style={sharedStyles.subtitle}>{lastRefreshMessage}</Text>
                 {weatherView}
                 <Divider style={[sharedStyles.divider, { marginTop: 0 }]} />
-                <Text style={styles.subtitle}>Data from Open-Meteo's API</Text>
+                <Text style={sharedStyles.subtitle}>Data from Open-Meteo's API</Text>
             </ScrollView>
 
             <Snackbar
@@ -232,13 +230,6 @@ function WeatherScreen() {
 
 const styles = StyleSheet.create({
 
-    loadingAnimation: {
-        marginVertical: 20
-    },
-    subtitle: {
-        marginBottom: 15,
-        fontStyle: "italic"
-    },
     errorMessage: {
         fontWeight: sharedStyles.bold,
         marginBottom: 15,

@@ -8,12 +8,19 @@ export default StyleSheet.create({
         backgroundColor: colors.outline,
         marginVertical: 15
     },
-    screen: {
-        flex: 1,
+    loadingAnimation: {
+        marginVertical: 20
     },
     mainContainer: {
         flexGrow: 1,
         marginHorizontal: 15
+    },
+    screen: {
+        flex: 1,
+    },
+    subtitle: {
+        marginBottom: 15,
+        fontStyle: "italic"
     },
 
 })
