@@ -1,6 +1,6 @@
 const format = "12";
 
-const convertTime = (time24) => {
+function convertTime(time24) {
 
         if (format === "24")
             return time24;
@@ -19,10 +19,16 @@ const convertTime = (time24) => {
 
 }
 
-const generateTime = (d) => {
+function generateTime(d) {
 
     return convertTime(`${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`)
 
 }
 
-export default { convertTime, generateTime }
+function pad(number) {
+
+    return number.toString().padStart(2, "0")
+
+}
+
+export default { convertTime, generateTime, pad }

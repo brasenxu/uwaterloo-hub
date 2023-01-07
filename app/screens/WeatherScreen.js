@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Platform, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { Appbar, Avatar, Card, Divider, Snackbar, Text } from "react-native-paper";
+import { Platform, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Appbar, Avatar, Card, Divider, Snackbar, Text } from "react-native-paper";
 
 import colors from "../config/colors";
 import sharedStyles from "../config/sharedStyles";
@@ -12,10 +12,12 @@ function renderWeatherView(weatherData) {
     if (weatherData === null) {
         return (
             <View style={{ justifyContent: "center" }}>
-                <Text>An error occurred.</Text>
+                <Text style={styles.errorMessage}>Something went wrong.</Text>
             </View>
-        )
+        );
     }
+
+    weatherData = parseWeatherData(weatherData)
 
     return (
         <View style={{ flex: 1 }}>
@@ -26,7 +28,33 @@ function renderWeatherView(weatherData) {
             <Divider style={sharedStyles.divider} />
             {[...weatherData.hourly.entries()].map((entry) => renderHourlyCard(entry, weatherData.today))}
         </View>
-    )
+    );
+
+}
+
+function parseWeatherData(weatherData) {
+
+    const now = new Date();
+    const nowString = `${now.getFullYear()}-${utils.pad(now.getMonth() + 1)}-${utils.pad(now.getDate())}`;
+    const startIndex = weatherData["hourly"].time.indexOf(`${nowString}T${utils.pad(now.getHours())}:00`);
+    const endIndex = weatherData["hourly"].time.indexOf(`${nowString}T23:00`);
+    const hourlyData = [];
+
+    for (let i = startIndex; i <= endIndex; i++) {
+        hourlyData.push([
+            weatherData["hourly"].time[i], Math.round(weatherData["hourly"]["apparent_temperature"][i]),
+            weatherData["hourly"]["precipitation"][i], weatherData["hourly"]["weathercode"][i]
+        ]);
+    }
+
+    return {
+        hourly: hourlyData,
+        today: [
+            weatherData["daily"]["weathercode"][0], Math.round(weatherData["daily"]["apparent_temperature_max"][0]),
+            Math.round(weatherData["daily"]["apparent_temperature_min"][0]), weatherData["daily"]["sunrise"][0],
+            weatherData["daily"]["sunset"][0]
+        ]
+    }
 
 }
 
@@ -63,7 +91,7 @@ function renderCurrentWidget(weatherData) {
 
 function renderTodayWidget(todayData) {
 
-    const weatherStyle = getWeatherStyle(todayData[0], todayData[3], todayData[3], todayData[4])
+    const weatherStyle = getWeatherStyle(todayData[0], todayData[3], todayData[3], todayData[4]);
 
     return (
         <View style={[styles.widget, styles.todayWidget]}>
@@ -95,13 +123,13 @@ function renderHourlyCard([index, hourData], todayData) {
             icon={`weather-${weatherStyle.icon}`}
             size={45}
             style={{ backgroundColor: weatherStyle.primary }} />
-    )
+    );
     const renderRightAvatar = () => (
         <Avatar.Text
             label={`${hourData[1]}ᶜ`}
             size={45}
             style={styles.hourlyTemp} />
-    )
+    );
 
     return (
         <Card style={styles.hourlyCard} mode="outlined" key={index}>
@@ -125,11 +153,10 @@ function WeatherScreen() {
         <ActivityIndicator
             animating={true}
             color={colors.inverseSurface}
-            size="large"
-            style={styles.loadingAnimation} />
+            style={sharedStyles.loadingAnimation} />
     );
 
-    const refreshCooldown = 15;
+    const [refreshCooldown, setRefreshCooldown] = useState(15);
     const [lastRefresh, setLastRefresh] = useState(new Date());
     const [lastRefreshMessage, setLastRefreshMessage] = useState("Updating...");
     const [refreshControlVisible, setRefreshControlVisible] = useState(false);
@@ -137,57 +164,33 @@ function WeatherScreen() {
 
     function loadData(userTriggered) {
 
-        const currentTime = new Date();
+        const now = new Date();
 
-        if (userTriggered && currentTime - lastRefresh < refreshCooldown * 60000) {
+        if (userTriggered && now - lastRefresh < refreshCooldown * 60000) {
             setRefreshWarningVisible(true);
             return;
         }
 
-        setLastRefresh(currentTime)
-        setLastRefreshMessage("Updating...")
+        setLastRefresh(now);
+        setLastRefreshMessage("Updating...");
 
         fetch("https://api.open-meteo.com/v1/forecast?latitude=43.4706&longitude=-80.5424&hourly=apparent_temperature,precipitation,weathercode&models=gfs_hrrr&daily=weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset&timezone=America%2FNew_York")
-            .then((res) => res.json())
-            .then((res) => {
-
-                const pad = (number) => number.toString().padStart(2, "0");
-
-                const now = new Date();
-                const nowString = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-                const startIndex = res["hourly"].time.indexOf(`${nowString}T${pad(now.getHours())}:00`);
-                const endIndex = res["hourly"].time.indexOf(`${nowString}T23:00`);
-                const hourlyData = [];
-
-                for (let i = startIndex; i <= endIndex; i++) {
-                    hourlyData.push([
-                        res["hourly"].time[i], Math.round(res["hourly"]["apparent_temperature"][i]),
-                        res["hourly"]["precipitation"][i], res["hourly"]["weathercode"][i]
-                    ])
-                }
-
-                setWeatherView(renderWeatherView({
-                    hourly: hourlyData,
-                    today: [
-                        res["daily"]["weathercode"][0], Math.round(res["daily"]["apparent_temperature_max"][0]),
-                        Math.round(res["daily"]["apparent_temperature_min"][0]), res["daily"]["sunrise"][0],
-                        res["daily"]["sunset"][0]
-                    ]
-                }))
-
-                setLastRefreshMessage(`Last updated at ${utils.generateTime(currentTime)}`)
-
+            .then(res => res.json())
+            .then(res => {
+                setRefreshCooldown(15);
+                setLastRefreshMessage(`Last updated at ${utils.generateTime(now)}`);
+                setWeatherView(renderWeatherView(res));
             })
-            /*.catch((e) => {
-                console.log(e)
-                setWeatherView(renderWeatherView(null))
-                setLastRefreshMessage(`Last update attempt at ${utils.generateTime(currentTime)}`)
-            })*/
+            .catch(() => {
+                setRefreshCooldown(0);
+                setLastRefreshMessage(`Last update attempt at ${utils.generateTime(now)}`);
+                setWeatherView(renderWeatherView(null));
+            })
 
     }
-    useEffect(() => loadData(false), [])
+    useEffect(() => loadData(false), []);
 
-    const onRefreshControl = () => {
+    function onRefreshControl() {
         setRefreshControlVisible(true);
         loadData(true);
         setRefreshControlVisible(false);
@@ -203,22 +206,21 @@ function WeatherScreen() {
             </Appbar.Header>
 
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 refreshControl={<RefreshControl onRefresh={onRefreshControl} refreshing={refreshControlVisible} />}
                 style={sharedStyles.mainContainer}>
 
-                <Text style={styles.subtitle}>{lastRefreshMessage}</Text>
+                <Text style={sharedStyles.subtitle}>{lastRefreshMessage}</Text>
                 {weatherView}
                 <Divider style={[sharedStyles.divider, { marginTop: 0 }]} />
-                <Text style={styles.subtitle}>Data from Open-Meteo API</Text>
+                <Text style={sharedStyles.subtitle}>Data from Open-Meteo's API</Text>
             </ScrollView>
 
             <Snackbar
-                visible={refreshWarningVisible}
+                action={{ label: "OK" }}
+                children={`You can only refresh once every ${refreshCooldown} minutes`}
                 onDismiss={() => setRefreshWarningVisible(false)}
-                action={{ label: "OK" }}>
-
-                You can only refresh once every 15 minutes.
-            </Snackbar>
+                visible={refreshWarningVisible} />
 
         </View>
 
@@ -228,12 +230,9 @@ function WeatherScreen() {
 
 const styles = StyleSheet.create({
 
-    loadingAnimation: {
-        marginVertical: 20
-    },
-    subtitle: {
+    errorMessage: {
+        fontWeight: sharedStyles.bold,
         marginBottom: 15,
-        fontStyle: "italic"
     },
 
     widgetContainer: {
@@ -331,7 +330,7 @@ const getWeatherStyle = (weathercode, hour, sunrise, sunset) => {
     };
 
     let resultStyle = codeToStyle[weathercode];
-    if ([0, 1, 2].includes(weathercode) && (new Date(hour) <= new Date(sunrise) || new Date(sunset) <= new Date(hour))) {
+    if (weathercode in [0, 1, 2] && (new Date(hour) <= new Date(sunrise) || new Date(sunset) <= new Date(hour))) {
         if (weathercode === 0)
             resultStyle = { name: "Clear", icon: "night", primary: "#333d4f", secondary: "#202540" };
         else if (weathercode === 1)
