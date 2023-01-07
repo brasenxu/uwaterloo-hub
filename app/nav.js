@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable } from "react-native";
-import { BottomNavigation, Text } from "react-native-paper";
+import { BottomNavigation } from "react-native-paper";
 
 import MapsScreen from "./screens/MapsScreen";
 import MoreScreen from "./screens/MoreScreen";
