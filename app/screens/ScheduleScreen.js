@@ -6,6 +6,39 @@ import sharedStyles from "../config/sharedStyles";
 import utils from "../config/utils";
 import colors from "../config/colors";
 
+function renderCard({ item }) {
+    return (
+        <Card style={styles.card} mode="outlined">
+            <Card.Title
+                title={item.name}
+                titleStyle={styles.cardTitle}
+                titleVariant="titleLarge"
+                subtitle={`${item.date}, ${item.time}`}
+                left={() => (
+                    <Avatar.Text
+                        size={40}
+                        style={styles.notFinishedAvatar}
+                        labelStyle={styles.weekdayAvatar}
+                        label={item.weekday}
+                    />
+                )}
+            />
+            <Card.Content>
+                <Paragraph>{item.location}</Paragraph>
+            </Card.Content>
+        </Card>
+    );
+}
+
+function updateData(d) {
+    const currTime = utils.generateTime(d);
+    if (currTime === "12:00am") {
+        console.log("New Day schedule change");
+    }
+
+    console.log(currTime + " " + currTime.charAt(currTime.length - 3));
+}
+
 function ScheduleScreen(props) {
     const [data, setData] = useState([]);
     const [isLoading, setLoading] = useState(false);
@@ -70,29 +103,29 @@ function ScheduleScreen(props) {
         },
     ];
 
-    const renderCard = ({ item }) => {
-        return (
-            <Card style={styles.card} mode="outlined">
-                <Card.Title
-                    title={item.name}
-                    titleStyle={styles.cardTitle}
-                    titleVariant="titleLarge"
-                    subtitle={`${item.date}, ${item.time}`}
-                    left={() => (
-                        <Avatar.Text
-                            size={40}
-                            style={styles.notFinishedAvatar}
-                            labelStyle={styles.weekdayAvatar}
-                            label={item.weekday}
-                        />
-                    )}
-                />
-                <Card.Content>
-                    <Paragraph>{item.location}</Paragraph>
-                </Card.Content>
-            </Card>
-        );
-    };
+    // const renderCard = ({ item }) => {
+    //     return (
+    //         <Card style={styles.card} mode="outlined">
+    //             <Card.Title
+    //                 title={item.name}
+    //                 titleStyle={styles.cardTitle}
+    //                 titleVariant="titleLarge"
+    //                 subtitle={`${item.date}, ${item.time}`}
+    //                 left={() => (
+    //                     <Avatar.Text
+    //                         size={40}
+    //                         style={styles.notFinishedAvatar}
+    //                         labelStyle={styles.weekdayAvatar}
+    //                         label={item.weekday}
+    //                     />
+    //                 )}
+    //             />
+    //             <Card.Content>
+    //                 <Paragraph>{item.location}</Paragraph>
+    //             </Card.Content>
+    //         </Card>
+    //     );
+    // };
 
     const handleRefresh = () => {
         // let API_URL = "https://jsonplaceholder.typicode.com/posts";
@@ -135,14 +168,14 @@ function ScheduleScreen(props) {
         };
     }, []);
 
-    const updateData = (d) => {
-        const currTime = utils.generateTime(d);
-        if (currTime === "12:00am") {
-            console.log("New Day schedule change");
-        }
+    // const updateData = (d) => {
+    //     const currTime = utils.generateTime(d);
+    //     if (currTime === "12:00am") {
+    //         console.log("New Day schedule change");
+    //     }
 
-        console.log(currTime + " " + currTime.charAt(currTime.length - 3));
-    };
+    //     console.log(currTime + " " + currTime.charAt(currTime.length - 3));
+    // };
 
     return (
         <View style={sharedStyles.screen}>
