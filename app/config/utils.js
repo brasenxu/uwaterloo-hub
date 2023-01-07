@@ -34,7 +34,7 @@ function pad(number) {
 function getTimeFormat() {
 
     if (format === "12")
-        return "hh:mmA"
+        return "hh:mma"
     return "HH:mm"
 
 }
