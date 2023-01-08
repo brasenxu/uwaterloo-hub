@@ -50,7 +50,7 @@ function ScheduleScreen(props) {
             date: "Jan 1st",
             weekday: "Mon",
             time: "12:00pm - 12:50pm",
-            location: "MC 4021 (Mathematics and Computer)",
+            location: "MC 4021 (Mathmatics and Computer)",
         },
         {
             name: "MATH 136",
