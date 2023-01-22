@@ -3,7 +3,7 @@ import { Pressable } from "react-native";
 import { BottomNavigation } from "react-native-paper";
 
 import MapsScreen from "./screens/MapsScreen";
-import MoreScreen from "./screens/MoreScreen";
+import SettingsPage from "./screens/Settings/SettingsPage";
 import RoomsScreen from "./screens/RoomsScreen";
 import ScheduleScreen from "./screens/ScheduleScreen";
 import WeatherScreen from "./screens/WeatherScreen";
@@ -17,7 +17,7 @@ const Nav = (props) => {
         { key: "maps", title: "Maps", focusedIcon: "compass", unfocusedIcon: "compass-outline" },
         { key: "schedule", title: "Schedule", focusedIcon: "calendar" },
         { key: "classroom", title: "Rooms", focusedIcon: "map-marker", unfocusedIcon: "map-marker-outline" },
-        { key: "more", title: "More", focusedIcon: "dots-horizontal" },
+        { key: "settings", title: "Settings", focusedIcon: "cog", unfocusedIcon: "cog-outline" },
     ]);
 
     const renderScene = BottomNavigation.SceneMap({
@@ -25,7 +25,7 @@ const Nav = (props) => {
         maps: MapsScreen,
         schedule: ScheduleScreen,
         classroom: RoomsScreen,
-        more: MoreScreen
+        settings: SettingsPage
     });
 
     return (
