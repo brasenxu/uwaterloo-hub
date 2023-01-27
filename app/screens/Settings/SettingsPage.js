@@ -1,13 +1,22 @@
 import React from 'react';
 import { ScrollView } from "react-native";
+
 import ListMenuItem from "../../components/ListMenuItem";
 import Page from "../../components/Page";
+import Category from "../../components/Category";
+import { Text } from "react-native-paper";
 
 
 function SettingsPage(props) {
 
     return (
         <Page title="Settings">
+            <Category title="Appearance">
+                <Text>hello</Text>
+            </Category>
+            <Category title="Appearance">
+
+            </Category>
             <ScrollView>
 
                 <ListMenuItem
