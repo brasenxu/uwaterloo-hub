@@ -18,7 +18,7 @@ function Page(props) {
 
     return (
 
-        <View style={[styles.page, { marginHorizontal: props.padSides ? 15 : 0}]}>
+        <View style={styles.page}>
             <Appbar.Header mode="small">
                 <Appbar.Content title={props.title} titleStyle={{ fontWeight: sharedStyles.bold }} />
                 {renderActions(props.actions)}
