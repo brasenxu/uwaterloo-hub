@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 
-import sharedStyles from "../config/sharedStyles";
+import sharedStyles from "../../config/sharedStyles";
 
 
 function MapsScreen(props) {
