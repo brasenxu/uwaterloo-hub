@@ -2,14 +2,14 @@ import React from "react";
 import { Pressable } from "react-native";
 import { BottomNavigation } from "react-native-paper";
 
-import MapsScreen from "./screens/MapsScreen";
+import MapsScreen from "./screens/Maps/MapsScreen";
 import MoreNavigator from "./screens/More/MoreNavigator";
-import RoomsScreen from "./screens/RoomsScreen";
+import RoomsScreen from "./screens/Rooms/RoomsScreen";
 import ScheduleScreen from "./screens/ScheduleScreen";
-import WeatherScreen from "./screens/WeatherScreen";
+import WeatherPage from "./screens/Weather/WeatherPage";
 
 
-const Navigator = () => {
+function Navigator() {
 
     const [index, setIndex] = React.useState(2);
     const [routes] = React.useState([
@@ -17,15 +17,15 @@ const Navigator = () => {
         { key: "maps", title: "Maps", focusedIcon: "compass", unfocusedIcon: "compass-outline" },
         { key: "schedule", title: "Schedule", focusedIcon: "calendar" },
         { key: "classroom", title: "Rooms", focusedIcon: "map-marker", unfocusedIcon: "map-marker-outline" },
-        { key: "settings", title: "Settings", focusedIcon: "cog", unfocusedIcon: "cog-outline" },
+        { key: "more", title: "More", focusedIcon: "dots-horizontal", unfocusedIcon: "dots-horizontal" }
     ]);
 
     const renderScene = BottomNavigation.SceneMap({
-        weather: WeatherScreen,
+        weather: WeatherPage,
         maps: MapsScreen,
         schedule: ScheduleScreen,
         classroom: RoomsScreen,
-        settings: MoreNavigator
+        more: MoreNavigator
     });
 
     return (
