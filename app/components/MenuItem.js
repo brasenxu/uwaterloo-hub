@@ -4,15 +4,15 @@ import { StyleSheet, View } from "react-native";
 
 import colors from "../config/colors";
 
-function ListMenuItem(props) {
+function MenuItem({ title, subtitle, icon, onPress }) {
 
     return (
-        <TouchableRipple onPress={props.onPress} rippleColor="#ffffff40">
+        <TouchableRipple onPress={onPress} rippleColor="#ffffff40">
             <View style={styles.item}>
-                <Avatar.Icon size={50} icon={props.icon} color={colors.primary} style={styles.iconAvatar} />
+                <Avatar.Icon size={50} icon={icon} color={colors.primary} style={styles.iconAvatar} />
                 <View style={styles.textContainer}>
-                    <Text variant="titleMedium">{props.title}</Text>
-                    <Text variant="bodySmall">{props.subtitle}</Text>
+                    <Text variant="titleMedium">{title}</Text>
+                    {subtitle ? <Text variant="bodySmall">{subtitle}</Text> : undefined}
                 </View>
             </View>
         </TouchableRipple>
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ListMenuItem;
+export default MenuItem;
