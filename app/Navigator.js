@@ -2,11 +2,11 @@ import React from "react";
 import { Pressable } from "react-native";
 import { BottomNavigation } from "react-native-paper";
 
-import MapsScreen from "./screens/Maps/MapsScreen";
-import MoreNavigator from "./screens/More/MoreNavigator";
-import RoomsScreen from "./screens/Rooms/RoomsScreen";
-import ScheduleScreen from "./screens/ScheduleScreen";
-import WeatherPage from "./screens/Weather/WeatherPage";
+import MapsScreen from "./pages/Maps/MapsScreen";
+import MoreNavigator from "./pages/More/MoreNavigator";
+import RoomsScreen from "./pages/Rooms/RoomsScreen";
+import SchedulePage from "./pages/Schedule/SchedulePage";
+import WeatherPage from "./pages/Weather/WeatherPage";
 
 
 function Navigator() {
@@ -23,7 +23,7 @@ function Navigator() {
     const renderScene = BottomNavigation.SceneMap({
         weather: WeatherPage,
         maps: MapsScreen,
-        schedule: ScheduleScreen,
+        schedule: SchedulePage,
         classroom: RoomsScreen,
         more: MoreNavigator
     });
@@ -38,7 +38,7 @@ function Navigator() {
         />
     );
 
-};
+}
 
 
 export default Navigator;

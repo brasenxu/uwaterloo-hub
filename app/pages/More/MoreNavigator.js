@@ -1,13 +1,13 @@
 import React from 'react';
-import { View } from "react-native";
-import Page from "../../components/Page";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, DarkTheme as NavDarkTheme, DarkTheme } from "@react-navigation/native";
-import colors from "../../config/colors";
 import { Appbar, MD3DarkTheme } from "react-native-paper";
+import { DarkTheme, NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import MorePage from "./MorePage";
-import sharedStyles from "../../config/sharedStyles";
 import SettingsPage from "../Settings/SettingsPage";
+import Page from "../../components/Page";
+import colors from "../../config/colors";
+import sharedStyles from "../../config/sharedStyles";
 
 
 const Stack = createStackNavigator();
@@ -20,7 +20,7 @@ const CombinedTheme = {
     }
 }
 
-function HeaderBar(props) {
+function HeaderBar() {
 
     return (
         <Appbar.Header>
@@ -29,7 +29,7 @@ function HeaderBar(props) {
     )
 }
 
-function MoreNavigator(props) {
+function MoreNavigator() {
 
     return (
         <Page>

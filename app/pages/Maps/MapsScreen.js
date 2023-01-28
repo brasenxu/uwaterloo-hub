@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 
 import sharedStyles from "../../config/sharedStyles";
 
 
-function MapsScreen(props) {
+function MapsScreen() {
     return (
         <View style={sharedStyles.screen}>
 
@@ -20,11 +20,6 @@ function MapsScreen(props) {
         </View>
     );
 }
-
-
-const styles = StyleSheet.create({
-
-})
 
 
 export default MapsScreen;

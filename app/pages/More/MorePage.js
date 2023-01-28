@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, View } from "react-native";
+
 import Divider from "../../components/Divider";
 import MenuItem from "../../components/MenuItem";
 

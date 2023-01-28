@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 
 import colors from "../config/colors";
 
+
 function MenuItem({ title, subtitle, icon, onPress }) {
 
     return (
@@ -37,4 +38,5 @@ const styles = StyleSheet.create({
 
 })
 
-export default MenuItem;
+
+export default MenuItem

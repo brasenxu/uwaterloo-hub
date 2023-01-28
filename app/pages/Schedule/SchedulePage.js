@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import { Appbar, Avatar, Card, Paragraph, Text } from "react-native-paper";
+import { Appbar, Avatar, Card, Paragraph } from "react-native-paper";
 
-import sharedStyles from "../config/sharedStyles";
-import utils from "../config/utils";
-import colors from "../config/colors";
+import sharedStyles from "../../config/sharedStyles";
+import utils from "../../config/utils";
+import colors from "../../config/colors";
 
 function renderCard({ item }) {
     return (
@@ -39,7 +39,7 @@ function updateData(d) {
     console.log(currTime + " " + currTime.charAt(currTime.length - 3));
 }
 
-function ScheduleScreen(props) {
+function SchedulePage() {
     const [data, setData] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const MINUTE_MS = 60000;
@@ -192,4 +192,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ScheduleScreen;
+export default SchedulePage;
