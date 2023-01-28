@@ -4,11 +4,11 @@ import colors from "../config/colors";
 import { Divider as PaperDivider } from "react-native-paper";
 
 
-function Divider() {
+function Divider({ margin }) {
 
     return (
 
-        <PaperDivider style={styles.divider} />
+        <PaperDivider style={[styles.divider, { marginVertical: margin ? margin : 0 }]} />
 
     );
 
@@ -17,7 +17,6 @@ function Divider() {
 const styles = StyleSheet.create({
     divider: {
         backgroundColor: colors.outline,
-        marginVertical: 15
     }
 })
 
