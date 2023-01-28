@@ -1,7 +1,7 @@
 import React from "react";
 import { MD3DarkTheme, Provider } from "react-native-paper";
 
-import Nav from "./app/nav";
+import Navigator from "./app/navigator";
 import { StatusBar } from "react-native";
 import colors from "./app/config/colors";
 
@@ -16,7 +16,7 @@ function App() {
 
     return (
         <Provider theme={theme}>
-            <Nav/>
+            <Navigator/>
         </Provider>
     );
 

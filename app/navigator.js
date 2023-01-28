@@ -9,7 +9,7 @@ import ScheduleScreen from "./screens/ScheduleScreen";
 import WeatherScreen from "./screens/WeatherScreen";
 
 
-const Nav = (props) => {
+const Navigator = (props) => {
 
     const [index, setIndex] = React.useState(2);
     const [routes] = React.useState([
@@ -41,4 +41,4 @@ const Nav = (props) => {
 };
 
 
-export default Nav;
+export default Navigator;
