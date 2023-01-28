@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Appbar, Avatar, Divider, List, Snackbar, Text } from "react-native-paper";
 
-import colors from "../config/colors";
-import sharedStyles from "../config/sharedStyles";
-import utils from "../config/utils";
+import colors from "../../config/colors";
+import sharedStyles from "../../config/sharedStyles";
+import utils from "../../config/utils";
 
 
 function renderRoomsView(roomsData) {

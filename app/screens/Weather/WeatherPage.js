@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Platform, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Appbar, Avatar, Card, Divider, Snackbar, Text } from "react-native-paper";
 
-import colors from "../config/colors";
-import sharedStyles from "../config/sharedStyles";
-import utils from "../config/utils";
+import colors from "../../config/colors";
+import sharedStyles from "../../config/sharedStyles";
+import utils from "../../config/utils";
 
 
 function renderWeatherView(weatherData) {
@@ -147,7 +147,7 @@ function renderHourlyCard([index, hourData], todayData) {
 
 }
 
-function WeatherScreen() {
+function WeatherPage() {
 
     const [weatherView, setWeatherView] = useState(
         <ActivityIndicator
@@ -347,4 +347,4 @@ const getWeatherStyle = (weathercode, hour, sunrise, sunset) => {
 }
 
 
-export default WeatherScreen;
+export default WeatherPage;
