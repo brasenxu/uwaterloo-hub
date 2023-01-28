@@ -6,6 +6,8 @@ import { NavigationContainer, DarkTheme as NavDarkTheme, DarkTheme } from "@reac
 import colors from "../../config/colors";
 import { Appbar, MD3DarkTheme } from "react-native-paper";
 import MorePage from "./MorePage";
+import sharedStyles from "../../config/sharedStyles";
+import SettingsPage from "../Settings/SettingsPage";
 
 
 const Stack = createStackNavigator();
@@ -18,10 +20,11 @@ const CombinedTheme = {
     }
 }
 
-function HeaderBar() {
+function HeaderBar(props) {
+
     return (
         <Appbar.Header>
-            <Appbar.Content title="More" />
+            <Appbar.Content title="More" titleStyle={{ fontWeight: sharedStyles.bold }}/>
         </Appbar.Header>
     )
 }
@@ -36,6 +39,8 @@ function MoreNavigator(props) {
                     screenOptions={{header: HeaderBar}}>
 
                     <Stack.Screen name="More" component={MorePage} />
+                    <Stack.Screen name="Settings" component={SettingsPage} />
+
                 </Stack.Navigator>
             </NavigationContainer>
         </Page>

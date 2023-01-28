@@ -1,18 +1,36 @@
 import React from "react";
 import { Image, View } from "react-native";
 import Divider from "../../components/Divider";
-import ListMenuItem from "../../components/ListMenuItem";
+import MenuItem from "../../components/MenuItem";
 
 
-function MorePage(props) {
+function MorePage({ navigation }) {
 
     return (
 
         <View>
-            <View style={{ alignItems: "center" }}>
-                <Image source={require("../../assets/logos/adaptive-icon.png")} style={{ width: 100, height: 100 }} />
+
+            <View style={{ alignItems: "center", marginBottom: 20 }}>
+                <Image source={require("../../assets/logos/white.png")} style={{ width: 120, height: 120 }} />
             </View>
             <Divider />
+
+            <MenuItem
+                title="UW Food Menu"
+                icon="food-outline" onPress={() => navigation.navigate("Settings")}/>
+            <MenuItem
+                title="GRT Schedule"
+                icon="bus-clock" onPress={() => navigation.navigate("Settings")}/>
+
+            <Divider />
+
+            <MenuItem
+                title="Settings"
+                icon="cog-outline" onPress={() => navigation.navigate("Settings")}/>
+            <MenuItem
+                title="About"
+                icon="information-outline" onPress={() => navigation.navigate("Settings")}/>
+
         </View>
 
     );
