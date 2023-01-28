@@ -1,7 +1,7 @@
 import React from "react";
 import { MD3DarkTheme, Provider } from "react-native-paper";
 
-import Navigator from "./app/navigator";
+import Navigator from "./app/Navigator";
 import { StatusBar } from "react-native";
 import colors from "./app/config/colors";
 

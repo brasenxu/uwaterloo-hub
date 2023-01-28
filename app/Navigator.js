@@ -3,13 +3,13 @@ import { Pressable } from "react-native";
 import { BottomNavigation } from "react-native-paper";
 
 import MapsScreen from "./screens/MapsScreen";
-import SettingsPage from "./screens/Settings/SettingsPage";
+import MoreNavigator from "./screens/More/MoreNavigator";
 import RoomsScreen from "./screens/RoomsScreen";
 import ScheduleScreen from "./screens/ScheduleScreen";
 import WeatherScreen from "./screens/WeatherScreen";
 
 
-const Navigator = (props) => {
+const Navigator = () => {
 
     const [index, setIndex] = React.useState(2);
     const [routes] = React.useState([
@@ -25,7 +25,7 @@ const Navigator = (props) => {
         maps: MapsScreen,
         schedule: ScheduleScreen,
         classroom: RoomsScreen,
-        settings: SettingsPage
+        settings: MoreNavigator
     });
 
     return (
