@@ -4,28 +4,29 @@ import { Appbar } from "react-native-paper";
 import sharedStyles from "../config/sharedStyles";
 
 
-function renderActions(actions) {
+function Page({ actions, children, title }) {
 
-    if (!actions) {
-        return undefined;
+    let actionsComponent = undefined;
+    let headerComponent = undefined
+
+    if (actions) {
+        actionsComponent = actions.map((icon, onPress) => <Appbar.Action icon={icon} onPress={onPress} key={icon} />);
     }
 
-    return actions.map((icon, onPress) => <Appbar.Action icon={icon} onPress={onPress} key={icon} />)
-
-}
-
-function Page(props) {
+    if (title) {
+        headerComponent = (
+            <Appbar.Header mode="small">
+                <Appbar.Content title={title} titleStyle={{ fontWeight: sharedStyles.bold }} />
+                {actionsComponent}
+            </Appbar.Header>
+        );
+    }
 
     return (
-
         <View style={styles.page}>
-            <Appbar.Header mode="small">
-                <Appbar.Content title={props.title} titleStyle={{ fontWeight: sharedStyles.bold }} />
-                {renderActions(props.actions)}
-            </Appbar.Header>
-            {props.children}
+            {headerComponent}
+            {children}
         </View>
-
     );
 
 }
