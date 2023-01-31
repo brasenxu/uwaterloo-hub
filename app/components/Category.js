@@ -6,7 +6,7 @@ import colors from "../config/colors";
 function Category(props) {
     return (
         <View style={styles.category}>
-            <Text variant="titleSmall" style={styles.title}>{props.title}</Text>
+            <Text variant="titleMedium" style={styles.title}>{props.title}</Text>
             {props.children}
         </View>
     );
