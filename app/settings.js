@@ -1,11 +1,12 @@
 import { createContext } from "react";
+import { MD3DarkTheme } from "react-native-paper";
 
-import { themes } from "./config/themes";
+import { Default } from "./config/themes";
 
 
 export const Settings = createContext({
 
-    theme: themes.default,
+    theme: { ...MD3DarkTheme, colors: Default },
     setTheme: () => {},
     timeFormat: "ISO 8691",
     setTimeFormat: () => {}
